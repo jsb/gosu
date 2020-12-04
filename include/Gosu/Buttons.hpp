@@ -2,12 +2,11 @@
 
 namespace Gosu
 {
-    /// List of button and axis ids that can be used with Gosu::Input.
+    /// List of button and axis IDs that can be used with Gosu::Input.
     /// This enumeration contains ids for keyboard keys (KB_*),
     /// mouse buttons and mouse wheel (MS_*), as well as gamepad buttons (GP_*).
     enum ButtonName
     {
-        KB_RANGE_BEGIN,
         KB_ESCAPE          = 41,
         KB_F1              = 58,
         KB_F2              = 59,
@@ -95,7 +94,8 @@ namespace Gosu
         KB_X               = 27,
         KB_Y               = 28,
         KB_Z               = 29,
-        KB_ISO             = 100, // ` on US/UK macOS, < on EU macOS, \ on US/UK Windows
+        /// ` on US/UK macOS, < on EU macOS, \ on US/UK Windows
+        KB_ISO             = 100,
         KB_NUMPAD_0        = 98,
         KB_NUMPAD_1        = 89,
         KB_NUMPAD_2        = 90,
@@ -127,7 +127,6 @@ namespace Gosu
         MS_OTHER_5,
         MS_OTHER_6,
         MS_OTHER_7,
-        MS_RANGE_END = 0x110,
 
         GP_RANGE_BEGIN,
         GP_DPAD_LEFT = GP_RANGE_BEGIN,
