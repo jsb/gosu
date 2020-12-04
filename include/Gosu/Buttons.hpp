@@ -1,12 +1,10 @@
 #pragma once
 
-#include <Gosu/Platform.hpp>
-
 namespace Gosu
 {
-    //! List of button ids that can be used with Gosu::Input.
-    //! This enumeration contains ids for keyboard keys (KB_*),
-    //! mouse buttons and mouse wheel (MS_*) and gamepad buttons (GP_*).
+    /// List of button and axis ids that can be used with Gosu::Input.
+    /// This enumeration contains ids for keyboard keys (KB_*),
+    /// mouse buttons and mouse wheel (MS_*), as well as gamepad buttons (GP_*).
     enum ButtonName
     {
         KB_RANGE_BEGIN,
