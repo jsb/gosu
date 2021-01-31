@@ -6,6 +6,7 @@
 #include <Gosu/Color.hpp>
 #include <Gosu/GraphicsBase.hpp>
 #include <cassert>
+#include <iostream> // DEBUG!
 
 namespace Gosu
 {
@@ -104,22 +105,64 @@ namespace Gosu
             else { // vertices_or_block_index == 4
                 glBegin(GL_QUADS);
             }
+
+            double q[4];
+            std::fill(std::begin(q), std::end(q), 1.0);
+            if (vertices_or_block_index == 4) {
+                const auto det = [](double a, double b, double c, double d) {
+                    return a * d - b * c;
+                };
+
+                const double Ax = vertices[0].x;
+                const double Ay = vertices[0].y;
+                const double Bx = vertices[1].x;
+                const double By = vertices[1].y;
+                const double Cx = vertices[2].x;
+                const double Cy = vertices[2].y;
+                const double Dx = vertices[3].x;
+                const double Dy = vertices[3].y;
+
+                const double A_DAB = det(Bx - Ax, Dx - Ax, By - Ay, Dy - Ay);
+                const double A_ABC = det(Cx - Bx, Ax - Bx, Cy - By, Ay - By);
+                const double A_BCD = det(Dx - Cx, Bx - Cx, Dy - Cy, By - Cy);
+                const double A_CDA = det(Ax - Dx, Cx - Dx, Ay - Dy, Cy - Dy);
+
+                std::cout << "---" << std::endl;
+                std::cout << "A_DAB: " << A_DAB << std::endl;
+                std::cout << "A_ABC: " << A_ABC << std::endl;
+                std::cout << "A_BCD: " << A_BCD << std::endl;
+                std::cout << "A_CDA: " << A_CDA << std::endl;
+
+                const double q_A = 0.5 * (A_DAB + A_BCD) / A_BCD;
+                const double q_B = 0.5 * (A_ABC + A_CDA) / A_CDA;
+                const double q_C = 0.5 * (A_BCD + A_DAB) / A_DAB;
+                const double q_D = 0.5 * (A_CDA + A_ABC) / A_ABC;
+                std::cout << "q_A: " << q_A << std::endl;
+                std::cout << "q_B: " << q_B << std::endl;
+                std::cout << "q_C: " << q_C << std::endl;
+                std::cout << "q_D: " << q_D << std::endl;
+
+                q[0] = q_A;
+                q[1] = q_B;
+                q[2] = q_C;
+                q[3] = q_D;
+            }
             
             for (unsigned i = 0; i < vertices_or_block_index; i++) {
                 glColor4ubv(reinterpret_cast<const GLubyte*>(&vertices[i].c));
                 if (render_state.texture) {
                     switch (i) {
                     case 0:
-                        glTexCoord2f(left, top);
+                        glTexCoord4f(left * q[i], top * q[i], 0, q[i]);
                         break;
                     case 1:
-                        glTexCoord2f(right, top);
+                        glTexCoord4f(right * q[i], top * q[i], 0, q[i]);
                         break;
                     case 2:
-                        glTexCoord2f(right, bottom);
+                        glTexCoord4f(right * q[i], bottom * q[i], 0, q[i]);
                         break;
                     case 3:
-                        glTexCoord2f(left, bottom);
+                        glTexCoord4f(left * q[i], bottom * q[i], 0, q[i]);
                         break;
                     }
                 }
