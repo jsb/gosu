@@ -127,25 +127,25 @@ namespace Gosu
                 const double A_BCD = det(Dx - Cx, Bx - Cx, Dy - Cy, By - Cy);
                 const double A_CDA = det(Ax - Dx, Cx - Dx, Ay - Dy, Cy - Dy);
 
-                std::cout << "---" << std::endl;
-                std::cout << "A_DAB: " << A_DAB << std::endl;
-                std::cout << "A_ABC: " << A_ABC << std::endl;
-                std::cout << "A_BCD: " << A_BCD << std::endl;
-                std::cout << "A_CDA: " << A_CDA << std::endl;
-
                 const double q_A = 0.5 * (A_DAB + A_BCD) / A_BCD;
                 const double q_B = 0.5 * (A_ABC + A_CDA) / A_CDA;
                 const double q_C = 0.5 * (A_BCD + A_DAB) / A_DAB;
                 const double q_D = 0.5 * (A_CDA + A_ABC) / A_ABC;
-                std::cout << "q_A: " << q_A << std::endl;
-                std::cout << "q_B: " << q_B << std::endl;
-                std::cout << "q_C: " << q_C << std::endl;
-                std::cout << "q_D: " << q_D << std::endl;
 
                 q[0] = q_A;
                 q[1] = q_B;
                 q[2] = q_C;
                 q[3] = q_D;
+
+                std::cout << "---" << std::endl;
+                std::cout << "A_DAB: " << A_DAB << std::endl;
+                std::cout << "A_ABC: " << A_ABC << std::endl;
+                std::cout << "A_BCD: " << A_BCD << std::endl;
+                std::cout << "A_CDA: " << A_CDA << std::endl;
+                std::cout << "q_A: " << q_A << std::endl;
+                std::cout << "q_B: " << q_B << std::endl;
+                std::cout << "q_C: " << q_C << std::endl;
+                std::cout << "q_D: " << q_D << std::endl;
             }
             
             for (unsigned i = 0; i < vertices_or_block_index; i++) {
