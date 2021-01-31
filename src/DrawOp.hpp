@@ -153,20 +153,20 @@ namespace Gosu
                 if (render_state.texture) {
                     switch (i) {
                     case 0:
-                        glTexCoord4f(left * q[i], top * q[i], 0, q[i]);
+                        glTexCoord2f(left, top);
                         break;
                     case 1:
-                        glTexCoord4f(right * q[i], top * q[i], 0, q[i]);
+                        glTexCoord2f(right, top);
                         break;
                     case 2:
-                        glTexCoord4f(right * q[i], bottom * q[i], 0, q[i]);
+                        glTexCoord2f(right, bottom);
                         break;
                     case 3:
-                        glTexCoord4f(left * q[i], bottom * q[i], 0, q[i]);
+                        glTexCoord2f(left, bottom);
                         break;
                     }
                 }
-                glVertex2f(vertices[i].x, vertices[i].y);
+                glVertex4f(vertices[i].x / q[i], vertices[i].y / q[i], 0, 1 / q[i]);
             }
             
             glEnd();
